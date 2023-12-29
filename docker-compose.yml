@@ -2,7 +2,7 @@ version: '3.7'
 
 services: 
     postgresql:
-        image: postgres:14
+        image: postgres:16
         #restart: always
         env_file:
             - ./postgresql/.env.dev
@@ -16,7 +16,7 @@ services:
         volumes: 
             - odoo-data:/var/lib/odoo/
             - ./odoo/extra-addons/:/mnt/extra-addons/
-            #- ./odoo/odoo.conf:/etc/odoo/odoo.conf
+            - ./odoo/odoo.conf:/etc/odoo/odoo.conf
             
         #ports:
         #    - 8069:8069
