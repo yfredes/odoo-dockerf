@@ -20,8 +20,8 @@ services:
             #- ./odoo/odoo.conf:/etc/odoo/odoo.conf
             - postgresql-socket:/var/run/postgresql
             
-        #ports:
-        #    - 8069:8069
+        ports:
+            - 8069:8069
         env_file:
             - ./odoo/.env.dev
     #nginx:
