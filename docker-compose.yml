@@ -40,5 +40,6 @@ services:
         #    - odoo
 volumes: 
     postgres-run:
+    postgres-data:
     cubicerp-data:
     cubicerp-conf:
