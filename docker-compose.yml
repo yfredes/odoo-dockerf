@@ -2,39 +2,42 @@ version: '3.7'
 
 services: 
     postgresql:
-        image: postgres:16
+        image: postgres:12
         #restart: always
         env_file:
             - ./postgresql/.env.dev
         volumes: 
             - postgresql-data:/var/lib/postgresql/data
+            - postgresql-socket:/var/run/postgresql
     odoo:
-        build: ./odoo
+        image: c4a3d7d5aabe
         #restart: always
         depends_on:
             - postgresql
         volumes: 
-            - odoo-data:/var/lib/odoo/
-            - ./odoo/extra-addons/:/mnt/extra-addons/
-            - ./odoo/odoo.conf:/etc/odoo/odoo.conf
+            #- odoo-data:/var/lib/odoo/
+            #- ./odoo/extra-addons/:/mnt/extra-addons/
+            #- ./odoo/odoo.conf:/etc/odoo/odoo.conf
+            - postgresql-socket:/var/run/postgresql
             
         #ports:
         #    - 8069:8069
         env_file:
             - ./odoo/.env.dev
-    nginx:
-        build: ./nginx
+    #nginx:
+        #build: ./nginx
         #restart: always
-        ports:
-            - 80:80
-            - 443:443
-        volumes:
-            - ./nginx/ssl/:/etc/ssl/nginx/
-            - ./nginx/sites-enabled/:/etc/nginx/conf.d/
-        links:
-            - odoo
+        #ports:
+        #    - 80:80
+        #    - 443:443
+        #volumes:
+        #    - ./nginx/ssl/:/etc/ssl/nginx/
+        #    - ./nginx/sites-enabled/:/etc/nginx/conf.d/
+        #links:
+        #    - odoo
         #depends_on:
         #    - odoo
 volumes: 
     postgresql-data:
+    postgresql-socket:
     odoo-data:
