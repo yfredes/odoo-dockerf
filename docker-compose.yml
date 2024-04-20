@@ -14,6 +14,7 @@ services:
         #restart: always
         depends_on:
             - postgresql
+        command: bash /home/cubicerp/ecbc/start.sh
         volumes: 
             #- odoo-data:/var/lib/odoo/
             #- ./odoo/extra-addons/:/mnt/extra-addons/
